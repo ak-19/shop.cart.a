@@ -1,0 +1,17 @@
+{
+  "name": "shop.cart.a",
+  "version": "0.0.1",
+  "description": "shop cart use case A",
+  "main": "server.js",
+  "scripts": {
+    "server": "nodemon server.js"
+  },
+  "keywords": [
+    "shop cart"
+  ],
+  "author": "ante",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
