@@ -8,7 +8,7 @@ class ProductList extends Component {
     this.props.getProducts();
   }
   renderProducts(){
-    return this.props.productProvider.products.map(p => <Product key={p._id} {...p}/>);
+    return this.props.productProvider.products.map(p => <Product key={p._id} className="col" {...p}/>);
   }
   render () {
     if(this.props.productProvider.loading){
@@ -21,7 +21,9 @@ class ProductList extends Component {
 
     return (
       <div className="container">
+        <div className="row">
           {this.renderProducts()}
+        </div>
       </div>
     );
   }
