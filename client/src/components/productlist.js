@@ -1,28 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getProducts} from '../state/actions/product';
+import Product from './product';
 
 class ProductList extends Component {
   componentDidMount(){
     this.props.getProducts();
   }
   renderProducts(){
-    return this.props.productProvider.products.map(p => {
-      return (
-        <div  className="container"  key={p._id} style={{marginTop: '10px'}}>
-          <div className="row">
-            <div className="col">{p.name}</div>
-            <div className="col">Price: {p.price}</div>
-            <div className="col">Year: {p.releaseYear}</div>
-          </div>
-          <div className="row">
-            <div className="col-9"></div>
-            <div className="col-3"><button type="button" className="btn btn-primary">Buy</button></div>
-          </div>
-        </div>
-
-      )
-    })
+    return this.props.productProvider.products.map(p => <Product key={p._id} {...p}/>);
   }
   render () {
     if(this.props.productProvider.loading){
@@ -34,10 +20,8 @@ class ProductList extends Component {
     }
 
     return (
-      <div>
-        <div>
+      <div className="container">
           {this.renderProducts()}
-        </div>
       </div>
     );
   }
