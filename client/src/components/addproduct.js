@@ -67,7 +67,7 @@ class AddProduct extends React.Component {
         <form onSubmit={e => this.submitProduct(e)}>
           <div className="form-group">
             <label htmlFor="name">Product name</label>
-            <input type="text" className={error && error.name ? 'form-control' : 'form-control is-invalid'}
+            <input type="text" className='form-control'
                    id="name"
                    name="name"
                    aria-describedby="nameHelp"
