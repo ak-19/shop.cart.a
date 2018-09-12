@@ -1,6 +1,7 @@
 import {GET_PRODUCTS, PRODUCTS_LOADING, ERROR,
         ADD_PRODUCT_STARTED, ADD_PRODUCT_SUCESS,
-        ADD_PRODUCT_FAIL} from './types';
+        ADD_PRODUCT_FAIL,
+        PRODUCT_REMOVE_CLEAR_FLAG} from './types';
 import axios from 'axios';
 
 export const getProducts = () => {
@@ -27,6 +28,11 @@ export const addNewProduct = (product) => {
         })
         .catch(e => dispatch({type: ERROR, payload: e}));
   }
+}
+
+
+export const removeClearFlag = () => {
+    return dispatch => dispatch({type: PRODUCT_REMOVE_CLEAR_FLAG})
 }
 
 const getAllProducts = (dispatch) => {

@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {addNewProduct} from '../state/actions/product';
+import {removeClearFlag} from '../state/actions/product';
+
 import {clearError} from  '../state/actions/error';
 import validateProduct from '../validation/product';
 import  './addproduct.css';
@@ -17,6 +19,19 @@ class AddProduct extends React.Component {
 
   componentWillReceiveProps(props){
     const {error} = props.errorProvider;
+    const {clearForm} = props.productProvider;
+    if (clearForm) {
+      this.props.removeClearFlag();
+      this.setState({
+        name: '',
+        description: '',
+        vendor: '',
+        releaseYear: '',
+        price: 0,
+        error: undefined
+      });
+      return;
+    }
     if(error){
       this.setState({error});
     }
@@ -121,4 +136,4 @@ const mapStateToProps = (state) => ({
   errorProvider: state.errorReducer
 })
 
-export default connect(mapStateToProps, {addNewProduct, clearError})(AddProduct);
+export default connect(mapStateToProps, {addNewProduct, clearError, removeClearFlag})(AddProduct);

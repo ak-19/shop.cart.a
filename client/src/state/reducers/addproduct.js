@@ -1,11 +1,13 @@
 import {ADD_PRODUCT_SUCESS,
         ADD_PRODUCT_STARTED,
-        ADD_PRODUCT_FAIL} from '../actions/types';
+        ADD_PRODUCT_FAIL,
+        PRODUCT_REMOVE_CLEAR_FLAG} from '../actions/types';
 
 
 const initialState = {
   product: undefined,
-  processing: false
+  processing: false,
+  clearForm: false
 };
 
 export default (state = initialState, action) => {
@@ -19,12 +21,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         processing: false,
-        product: action.payload
+        clearForm: true
       };
-      case ADD_PRODUCT_FAIL:
+    case ADD_PRODUCT_FAIL:
+      return {
+        ...state,
+        processing: false
+      };
+      case PRODUCT_REMOVE_CLEAR_FLAG:
         return {
           ...state,
-          processing: false
+          processing: false,
+          clearForm: false
         };
     default:
       return {...state};
