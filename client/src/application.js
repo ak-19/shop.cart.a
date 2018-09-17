@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import {getStore} from './state/store';
 import ProductList from './components/productlist';
 import AddProduct from './components/addproduct';
+import Cart from './components/cart';
 import Layout from './hoc/layout';
 
 import './application.css';
@@ -13,7 +14,8 @@ class Application extends Component {
     return (
       <Provider store={getStore()}>
         <Layout>
-          <AddProduct  className="col-12 col-md-6"/>
+          <Cart/>
+          <AddProduct/>
           <ProductList/>
         </Layout>
       </Provider>
