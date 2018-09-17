@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getProducts} from '../state/actions/product';
 import Product from './product';
-import AddProduct from './addproduct';
 
 class ProductList extends Component {
   componentDidMount(){
@@ -23,7 +22,6 @@ class ProductList extends Component {
     return (
       <div className="container">
         <div className="row">
-          <AddProduct  className="col-12 col-md-6"/>
           {this.renderProducts()}
         </div>
       </div>
