@@ -1,9 +1,16 @@
 import React from 'react';
-
+import {connect} from 'react-redux';
+import CartItem from './cartitem';
+import {formatCurency} from '../util/format';
 import './cart.css';
+
 class Cart extends React.Component {
-  deleteItem(e){
-    console.log('Delete item stub');
+  renderCartItems(){
+    return this.props.cartProvider.items.map(item => {
+      return (
+        <CartItem  key={item.id} {...item}/>
+      )
+    });
   }
   render () {
     return (
@@ -18,25 +25,12 @@ class Cart extends React.Component {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>T-Shirt Y</td>
-            <td>1 <i className="fas fa-plus"></i> <i className="fas fa-minus"></i></td>
-            <td>21.21</td>
-            <td>21.21</td>
-            <td><div className='fa fa-window-close' onClick={e => this.deleteItem(e)}/></td>
-          </tr>
-          <tr>
-            <td>T-Shirt Y</td>
-            <td>1 <i className="fas fa-plus"></i> <i className="fas fa-minus"></i></td>
-            <td>21.21</td>
-            <td>21.21</td>
-            <td><div className='fa fa-window-close' onClick={e => this.deleteItem(e)}/></td>
-          </tr>
+          {this.renderCartItems()}
           <tr>
             <td></td>
             <td></td>
             <td></td>
-            <td>42.42</td>
+            <td>€{formatCurency(this.props.cartProvider.total)}</td>
             <td></td>
           </tr>
         </tbody>
@@ -45,4 +39,9 @@ class Cart extends React.Component {
   }
 }
 
-export default Cart;
+
+const mapStateToProps = (state) => ({
+  cartProvider: state.cartReducer
+})
+
+export default connect(mapStateToProps)(Cart);
