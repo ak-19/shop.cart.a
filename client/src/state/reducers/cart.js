@@ -1,7 +1,8 @@
 import {ADD_ITEM_TO_CART,
         DELETE_ITEM_FROM_CART,
         INCREASE_ITEM_QUANTITY_IN_CART,
-        DECREASE_ITEM_QUANTITY_IN_CART} from '../actions/types';
+        DECREASE_ITEM_QUANTITY_IN_CART,
+        CLEAR_CART} from '../actions/types';
 
 const defaultState = {
   items: [],
@@ -18,6 +19,11 @@ export default (state = defaultState, action) => {
       return increaseItemQuantity(state, action);
     case DECREASE_ITEM_QUANTITY_IN_CART:
       return decreaseItemQuantity(state, action);
+    case CLEAR_CART:
+      return  {
+        items: [],
+        total: 0
+      }
     default:
       return {...state}
   }
@@ -26,7 +32,7 @@ export default (state = defaultState, action) => {
 
 function increaseItemQuantity(state, action){
   const id = action.payload;
-  const founditem = state.items.find(i => i.id === id);
+  const founditem = state.items.find(i => i.productId === id);
   let {total} = state;
   if (founditem) {
     founditem.count++;
@@ -43,7 +49,7 @@ function increaseItemQuantity(state, action){
 
 function decreaseItemQuantity(state, action){
   const id = action.payload;
-  const founditemIndex = state.items.findIndex(i => i.id === id);
+  const founditemIndex = state.items.findIndex(i => i.productId === id);
   let {total} = state;
   if (founditemIndex !== -1) {
     const founditem = state.items[founditemIndex];
@@ -66,13 +72,13 @@ function decreaseItemQuantity(state, action){
 
 function addItemToCart(state, action){
   const item = action.payload;
-  const founditem = state.items.find(i => i.id === item.id);
+  const founditem = state.items.find(i => i.productId === item.productId);
   let total = state.total;
   if(founditem){
     founditem.count++;
     founditem.total+= item.price;
   }else{
-    state.items.push({id: item.id, name: item.name, count: 1, price: item.price, total: item.price});
+    state.items.push({productId: item.productId, name: item.name, count: 1, price: item.price, total: item.price});
   }
   total += item.price;
   return {
@@ -84,7 +90,7 @@ function addItemToCart(state, action){
 
 function deleteItemAndReturnNewState(state, action){
   const id = action.payload;
-  const items =  state.items.filter(item => item.id !== id);
+  const items =  state.items.filter(item => item.productId !== id);
   const total = items.reduce((prev, curr) => prev + curr.price * curr.count, 0);
   return {
     ...state,

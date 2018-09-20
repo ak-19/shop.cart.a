@@ -10,8 +10,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 const productRouter = require('./server/routes/product');
+const cartRouter = require('./server/routes/cart');
 
 app.use('/api/product', productRouter);
+app.use('/api/cart', cartRouter);
 
 const serverPort = process.env.PORT || 3001;
 

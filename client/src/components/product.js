@@ -4,8 +4,8 @@ import {addItemToCart} from '../state/actions/cart';
 
 class Product extends Component {
   addItemToCart(e){
-    const {_id: id, name, price} = this.props;
-    this.props.addItemToCart({id, name, price});
+    const {_id: productId, name, price} = this.props;
+    this.props.addItemToCart({productId, name, price});
   }
   render () {
     const {name, price, description} = this.props;

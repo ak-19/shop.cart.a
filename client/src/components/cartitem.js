@@ -5,17 +5,17 @@ import {deleteItemFromCart, increaseItemQuantity, decreaseItemQuantity} from '..
 
 class CartItem extends Component {
   increaseQuantity(){
-    this.props.increaseItemQuantity(this.props.id);
+    this.props.increaseItemQuantity(this.props.productId);
   }
 
   decreaseQuantity(){
-    this.props.decreaseItemQuantity(this.props.id);
+    this.props.decreaseItemQuantity(this.props.productId);
   }
 
   deleteItem(id){
-    this.props.deleteItemFromCart(this.props.id);
+    this.props.deleteItemFromCart(this.props.productId);
   }
-  
+
   render () {
     return (
       <tr>
