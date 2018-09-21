@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import {getStore} from './state/store';
 import ProductList from './components/productlist';
 import AddProduct from './components/addproduct';
+import DeleteProduct from './components/deleteproduct';
 import Cart from './components/cart';
 import Layout from './hoc/layout';
 
@@ -16,6 +17,7 @@ class Application extends Component {
         <Layout>
           <Cart/>
           <AddProduct/>
+          <DeleteProduct/>
           <ProductList/>
         </Layout>
       </Provider>

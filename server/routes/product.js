@@ -37,4 +37,22 @@ productRouter.post('/', (req,res) => {
   })
 });
 
+productRouter.delete('/:id', (req,res) => {
+  const {id} = req.params;
+  if (!id) {
+    return res.json({error: 'Id can not be empty'})
+  }
+
+  Product
+  .findByIdAndDelete(id)
+  .then(deletedProduct => {
+    if (deletedProduct) {
+      return res.json({msg: 'Product deleted'})
+    }
+  })
+  .catch(e => {
+    res.send(e);
+  })
+});
+
 module.exports = productRouter;

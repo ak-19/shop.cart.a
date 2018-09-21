@@ -30,6 +30,22 @@ export const addNewProduct = (product) => {
   }
 }
 
+export const deleteProduct = (id) => {
+  console.log(id);
+  return dispatch => {
+    axios
+        .delete(`/api/product/${id}`)
+        .then(res => {
+            const {error} = res.data;
+            if (error) {
+              dispatch({type: ERROR, payload: error})
+            }else {
+              getAllProducts(dispatch);
+            }
+        })
+        .catch(e => dispatch({type: ERROR, payload: e}));
+  }
+}
 
 export const removeClearFlag = () => {
     return dispatch => dispatch({type: PRODUCT_REMOVE_CLEAR_FLAG})
