@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {deleteProduct} from '../state/actions/product';
 
-import './deleteproduct.css';
-
 class DeleteProduct extends Component {
   state = {
     selectedProduct: undefined
@@ -39,7 +37,10 @@ class DeleteProduct extends Component {
 
   render () {
    return (
-     <div className="deleteproduct-box">
+     <div  className="card card-body bg-light">
+       <h4>
+         Delete product
+       </h4>
        <div className="form-group">
          <label htmlFor="productDeleteSelection">
           Select product to delete
@@ -48,7 +49,7 @@ class DeleteProduct extends Component {
            {this.renderSelectItems()}
          </select>
        </div>
-       <button className="btn btn-primary mb-2" onClick={ e => this.deleteSelected()}>Delete selected product</button>
+       <button className="btn btn-primary col-3" onClick={ e => this.deleteSelected()}>Delete selected product</button>
      </div>
    )
   }
