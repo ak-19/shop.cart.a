@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 class Navbar extends Component {
+  getTotalQuantity(){
+    return this.props.cartProvider.items.reduce( (prev,curr) => prev + curr.count, 0);
+  }
   render () {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -18,8 +22,7 @@ class Navbar extends Component {
                   <Link className="nav-link" to="/admin">Admin</Link>
               </li>
               <li className="nav-item">
-                  <Link className="nav-link" to="/cart">Your car
-                    t<span className="badge badge-secondary">5</span></Link>
+                  <Link className="nav-link" to="/cart">Your cart<span className="badge badge-secondary">{this.getTotalQuantity()}</span></Link>
               </li>
           </ul>
         </div>
@@ -28,4 +31,8 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+  cartProvider: state.cartReducer
+})
+
+export default connect(mapStateToProps, {})(Navbar);
