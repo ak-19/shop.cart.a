@@ -7,7 +7,6 @@ import AddProduct from './components/addproduct';
 import DeleteProduct from './components/deleteproduct';
 import Cart from './components/cart';
 import Layout from './hoc/layout';
-import Navbar from './partialcomponents/navbar';
 import './application.css';
 
 class Application extends Component {
@@ -15,7 +14,6 @@ class Application extends Component {
     return (
       <Provider store={getStore()}>
         <Layout>
-          <Navbar/>
           <Cart/>
           <AddProduct/>
           <DeleteProduct/>
