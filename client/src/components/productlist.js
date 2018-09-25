@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {getProducts} from '../state/actions/product';
 import Product from './product';
 
+import './productlist.css';
+
 class ProductList extends Component {
   componentDidMount(){
     this.props.getProducts();
@@ -21,6 +23,12 @@ class ProductList extends Component {
 
     return (
       <div className="container">
+        <div className="pricing-header-background pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+          <h1 className="display-4">Shop cart A</h1>
+          <p className="lead">
+            Click buy and add product to the cart
+          </p>
+        </div>
         <div className="card-deck mb-3 text-center">
           {this.renderProducts()}
         </div>
