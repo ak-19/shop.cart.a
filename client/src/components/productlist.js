@@ -21,7 +21,7 @@ class ProductList extends Component {
 
     return (
       <div className="container">
-        <div className="row">
+        <div className="card-deck mb-3 text-center">
           {this.renderProducts()}
         </div>
       </div>
