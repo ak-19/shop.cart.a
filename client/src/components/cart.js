@@ -15,11 +15,16 @@ class Cart extends React.Component {
     this.setState({showCheckout: show});
   }
 
+  get haveItemsInCart(){
+    return this.props.cartProvider.items.length > 0;
+  }
+
   renderCheckoutFeature(){
       return (
         <tr>
           <td>
-            <button  className="btn btn-primary" onClick={e => this.openCheckoutConfirmationDialog(true)}>Checkout</button></td>
+            { this.haveItemsInCart ? <button  className="btn btn-primary" onClick={e => this.openCheckoutConfirmationDialog(true)}>Checkout</button> : null}
+          </td>
           <td>
           </td>
           <td></td>
