@@ -2,6 +2,7 @@ import {ADD_ITEM_TO_CART,
         DELETE_ITEM_FROM_CART,
         INCREASE_ITEM_QUANTITY_IN_CART,
         DECREASE_ITEM_QUANTITY_IN_CART,
+        RESTORE_CART_FROM_LOCALSTORAGE_IF_EXISTS,
         CLEAR_CART} from '../actions/types';
 
 const defaultState = {
@@ -12,23 +13,40 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case ADD_ITEM_TO_CART:
-      return addItemToCart(state, action);
+      return addCartToLocalStorage(addItemToCart(state, action));
     case DELETE_ITEM_FROM_CART:
-      return deleteItemAndReturnNewState(state, action);
+      return addCartToLocalStorage(deleteItemAndReturnNewState(state, action));
     case INCREASE_ITEM_QUANTITY_IN_CART:
-      return increaseItemQuantity(state, action);
+      return addCartToLocalStorage(increaseItemQuantity(state, action));
     case DECREASE_ITEM_QUANTITY_IN_CART:
-      return decreaseItemQuantity(state, action);
+      return addCartToLocalStorage(decreaseItemQuantity(state, action));
+    case RESTORE_CART_FROM_LOCALSTORAGE_IF_EXISTS:
+      return restoreCartFromLocalstorageIfExists();
     case CLEAR_CART:
-      return  {
-        items: [],
-        total: 0
-      }
+      return clearCartFromLocalStorage ({ items: [], total: 0 })
     default:
       return {...state}
   }
 }
 
+function clearCartFromLocalStorage(cart) {
+  localStorage.clear();
+  return cart;
+}
+
+function addCartToLocalStorage(cart) {
+  localStorage.setItem('cart', JSON.stringify(cart));
+  return cart;
+}
+
+function restoreCartFromLocalstorageIfExists() {
+  const cart = JSON.parse(localStorage.getItem('cart'))
+               || {
+                 items: [],
+                 total: 0
+               };
+  return cart;
+}
 
 function increaseItemQuantity(state, action){
   const id = action.payload;
